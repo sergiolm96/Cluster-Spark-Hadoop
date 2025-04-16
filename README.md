@@ -111,11 +111,7 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 Estructura de archivos
 ----------------------
 
-plaintext
-
-CopiarEditar
-
-`project-root/
+```project-root/
 │
 ├── data/                # Contiene los archivos de logs (access.log)
 │
@@ -125,7 +121,7 @@ CopiarEditar
 │
 ├── requirements.txt     # Requisitos para el entorno Python
 │
-└── README.md            # Este archivo`
+└── README.md            # Este archivo```
 
 Posibilidades y Mejoras
 -----------------------
