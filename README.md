@@ -106,7 +106,13 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
 6. **Carga y procesa los logs**:
 
-    Los logs (`access.log`) se encuentran en el volumen `./data`, lo que permite acceder a ellos desde Jupyter para el procesamiento y análisis.
+    Ejecuta el siguiente comando en tu terminal para cargar el archivo en Hadoop
+
+    bash
+
+    CopiarEditar
+
+    `docker exec -it hadoop-namenode bash -c "hdfs dfs -mkdir -p /logs/input && hdfs dfs -put -f ./data/access.log /logs/input/"`
 
 Estructura de archivos
 ----------------------
@@ -126,33 +132,6 @@ CopiarEditar
 ├── requirements.txt     # Requisitos para el entorno Python
 │
 └── README.md            # Este archivo`
-
-Posibilidades y Mejoras
------------------------
-
-### 1\. **Automatización del proceso de carga de logs**:
-
-En el futuro, se puede automatizar la carga del archivo de logs a HDFS directamente al iniciar los contenedores de Hadoop sin necesidad de intervención manual. Esto podría lograrse modificando el `entrypoint` o mediante un script que se ejecute automáticamente al iniciar el contenedor.
-
-### 2\. **Análisis y visualización avanzada de datos**:
-
-Actualmente, el análisis se centra en IPs, errores y solicitudes por hora. Se podrían agregar más métricas o incluso realizar análisis de tendencias a lo largo del tiempo. También, se pueden integrar visualizaciones más complejas usando bibliotecas como **Matplotlib**, **Seaborn** o **Plotly**.
-
-### 3\. **Escalabilidad**:
-
-Aunque el proyecto está configurado para funcionar con un único DataNode y un solo NameNode, se podría mejorar la escalabilidad añadiendo más DataNodes para mejorar el rendimiento del sistema de almacenamiento distribuido.
-
-### 4\. **Integración con un sistema de monitoreo**:
-
-Para proyectos más grandes, sería útil implementar un sistema de monitoreo para supervisar el rendimiento del clúster de Hadoop. Herramientas como **Prometheus** o **Grafana** podrían proporcionar visibilidad sobre el estado de los contenedores y los recursos de Hadoop.
-
-### 5\. **Mejora en la gestión de errores**:
-
-Actualmente, el análisis de errores se realiza de manera básica. En el futuro, se podría integrar un sistema más avanzado de análisis de logs de error, como alertas en tiempo real o el uso de herramientas como **ELK Stack (Elasticsearch, Logstash, Kibana)** para una visualización y análisis más eficiente de los logs.
-
-### 6\. **Implementación de un pipeline de CI/CD**:
-
-Implementar un pipeline de integración continua (CI) y entrega continua (CD) permitiría automatizar la construcción y el despliegue de los contenedores Docker. Esto haría que el proceso de pruebas, integración y despliegue fuera mucho más fluido y eficiente.
 
 Conclusión
 ----------
