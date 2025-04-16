@@ -51,13 +51,11 @@ El proyecto está compuesto por los siguientes servicios, definidos en un archiv
 Requisitos previos
 ------------------
 
-Para ejecutar este proyecto, necesitas tener las siguientes herramientas instaladas:
+Para ejecutar este proyecto solo necesitas tener las siguientes herramientas instaladas:
 
 - **Docker**: Para ejecutar los contenedores.
 
-- **Docker Compose**: Para gestionar múltiples contenedores Docker de forma sencilla.
-
-- **Python**: Para ejecutar los scripts de PySpark en el entorno de Jupyter.
+- **Docker Compose**: Para gestionar múltiples contenedores Docker de forma sencilla y solo si no usas Docker Desktop.
 
 Instalación
 -----------
