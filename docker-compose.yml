@@ -1,0 +1,60 @@
+services:
+  pyspark:
+    image: jupyter/pyspark-notebook:latest
+    container_name: pyspark-container
+    volumes:
+      - ./src:/home/jovyan/src
+      - ./data:/home/jovyan/data
+      - /var/run/docker.sock:/var/run/docker.sock  # Monta el socket de Docker
+    ports:
+      - "8888:8888"
+    command: start-notebook.sh
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    networks:
+      - spark-hadoop-net
+
+  hadoop-namenode:
+    image: bde2020/hadoop-namenode:latest
+    container_name: hadoop-namenode
+    ports:
+      - "9870:9870"  # UI del NameNode
+      - "9000:9000"  # Puerto HDFS
+    environment:
+      - CLUSTER_NAME=test
+      - CORE_CONF_fs_defaultFS=hdfs://hadoop-namenode:9000
+      - CORE_CONF_hadoop_http_staticuser_user=root
+      - HDFS_CONF_dfs_webhdfs_enabled=true
+      - HDFS_CONF_dfs_permissions_enabled=false
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+      - ./data:/data
+    networks:
+      - spark-hadoop-net
+
+  hadoop-datanode:
+    image: bde2020/hadoop-datanode:latest
+    container_name: hadoop-datanode
+    depends_on:
+      - hadoop-namenode
+    environment:
+      - CLUSTER_NAME=test
+      - CORE_CONF_fs_defaultFS=hdfs://hadoop-namenode:9000
+      - CORE_CONF_hadoop_http_staticuser_user=root
+      - HDFS_CONF_dfs_webhdfs_enabled=true
+      - HDFS_CONF_dfs_permissions_enabled=false
+      - SERVICE_PRECONDITION=hadoop-namenode:9870
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    ports:
+      - "9864:9864"  # UI del DataNode
+    networks:
+      - spark-hadoop-net
+
+networks:
+  spark-hadoop-net:
+    driver: bridge
+
+volumes:
+  hadoop_namenode:
+  hadoop_datanode:
