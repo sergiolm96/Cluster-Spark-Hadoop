@@ -70,7 +70,7 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
     CopiarEditar
 
-    `git clone <repositorio-url>
+    `git clone <https://github.com/sergiolm96/Cluster-Spark-Hadoop.git>
     cd <directorio-del-repositorio>`
 
 2. **Asegúrate de tener Docker y Docker Compose instalados**:
@@ -117,11 +117,8 @@ Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 Estructura de archivos
 ----------------------
 
-plaintext
-
-CopiarEditar
-
-`project-root/
+```
+project-root/
 │
 ├── data/                # Contiene los archivos de logs (access.log)
 │
@@ -131,7 +128,8 @@ CopiarEditar
 │
 ├── requirements.txt     # Requisitos para el entorno Python
 │
-└── README.md            # Este archivo`
+└── README.md            # Este archivo
+```
 
 Conclusión
 ----------
